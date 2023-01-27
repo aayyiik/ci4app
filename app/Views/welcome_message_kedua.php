@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello halaman welkom 2</h1>
+    <h1>Hello Siswa <?php echo $id ?> </h1>
 </body>
 </html>
