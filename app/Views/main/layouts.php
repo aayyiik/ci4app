@@ -129,25 +129,25 @@
           </li>
           <li class="nav-header">TRANSAKSI</li>
           <li class="nav-item">
-            <a href="../calendar.html" class="nav-link">
+            <a href="<?= site_url('kategori/index') ?>" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
-                Barang Masuk
+                KATEGORI
                 <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="../gallery.html" class="nav-link">
+            <a href="<?= site_url('satuan/index') ?>" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Barang Keluar
+                SATUAN
               </p>
             </a>
           </li>
           <li class="nav-header">DATA MASTER</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= site_url('barang/index') ?>" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>DATA BARANG</p>
             </a>

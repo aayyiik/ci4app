@@ -12,6 +12,9 @@ $routes = Services::routes();
  */
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Main');
+$routes->setAutoRoute('barang');
+$routes->setAutoRoute('kategori');
+$routes->setAutoRoute('satuan');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
