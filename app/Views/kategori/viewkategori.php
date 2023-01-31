@@ -1,13 +1,36 @@
-<?= $this->extend('main/layouts')?>
+<?= $this->extend('main/layouts') ?>
 
-<?= $this->section('judul')?>
+<?= $this->section('judul') ?>
 Manajemen Data Kategori
-<?= $this->endSection('judul')?>
+<?= $this->endSection('judul') ?>
 
-<?= $this->section('subjudul')?>
-Data Kategori
-<?= $this->endSection('subjudul')?>
+<?= $this->section('subjudul') ?>
 
-<?= $this->section('isi')?>
+<?= form_button('','<i class="fa fa-plus-circle"></i> Tambah Data', [
+  'class' => 'btn btn-primary',
+  'onclick' => "location.href=('".site_url('kategori/formtambah'). "')"
+]) ?>
 
-<?= $this->endSection('isi')?>
+<?= $this->endSection('subjudul') ?>
+
+<?= $this->section('isi') ?>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th style="width: 10px">No</th>
+      <th>Nam Kategori</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $nomor = 1;
+    foreach ($tampildata as $row) :
+    ?>
+      <tr>
+        <td><?= $nomor++; ?></td>
+        <td><?= $row['katnama'] ?></td>
+      </tr>
+    <?php endforeach ?>
+  </tbody>
+</table>
+<?= $this->endSection('isi') ?>
