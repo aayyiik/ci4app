@@ -93,10 +93,11 @@ class Kategori extends BaseController
         }
     }
 
-    public function update(){
+    public function updatedata(){
         
         $kategori = model(Modelkategori::class);
 
+        $idkategori = $this->request->getVar('idkategori');
         $namakategori = $this->request->getVar('namakategori');
 
         $validation = \Config\Services::validation();
@@ -118,10 +119,10 @@ class Kategori extends BaseController
             ];
 
             session()->setFlashdata($pesan);
-            return redirect()->to('/kategori/formtambah');
+            return redirect()->to('/kategori/formedit/'.$idkategori);
         } else {
 
-            $kategori->insert([
+            $kategori->update($idkategori, [
                 'katnama' => $namakategori
             ]);
 
@@ -132,6 +133,26 @@ class Kategori extends BaseController
 
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
+        }
+    }
+
+    public function delete($id){
+        $kategori = model(Modelkategori::class);
+
+        $rowData = $kategori->find($id);
+
+        if($rowData){
+            $kategori->delete($id);
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-danger"> Data Kategori Berhasil dihapus</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/index');
+
+        }else{
+            exit('data tidak ditemukan');
         }
     }
 }

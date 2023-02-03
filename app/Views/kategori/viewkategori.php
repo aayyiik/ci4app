@@ -37,7 +37,7 @@ Manajemen Data Kategori
           <i class="fa fa-edit"></i>
           </button>
 
-          <button type="button" class="btn btn-danger" title="Hapus Data" onclick="delete('<?= $row['katid'] ?>')">
+          <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
           <i class="fa fa-trash-alt"></i>
           </button>
         </td>
@@ -49,6 +49,16 @@ Manajemen Data Kategori
 <script>
   function edit(id){
     window.location=('/kategori/formedit/'+id);
+  }
+
+  function hapus(id){
+    $pesan = confirm('yakin data kategori dihapus?');
+
+    if($pesan){
+      window.location=('/kategori/delete/'+id);
+    }else{
+      return false;
+    }
   }
   </script>
 
