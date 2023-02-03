@@ -12,13 +12,14 @@ class Kategori extends BaseController
 
     public function __construct()
     {
-        $kategori = new Modelkategori();
+
+        $kategori = model(Modelkategori::class);
 
         $this->findAll = [
             'tampildata' => $kategori->table('kategori')->findAll()
         ];
     }
-        
+
     public function index()
     {
         $data = [
@@ -30,5 +31,48 @@ class Kategori extends BaseController
     public function formtambah()
     {
         return view('kategori/formtambah');
+    }
+
+    public function simpandata()
+    {
+
+        $kategori = model(Modelkategori::class);
+
+        $namakategori = $this->request->getVar('namakategori');
+
+        $validation = \Config\Services::validation();
+
+        $valid = $this->validate([
+            'namakategori' => [
+                'rules' => 'required',
+                'label' => 'Nama Kategori',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ],
+            ],
+        ]);
+
+        if (!$valid) {
+            $pesan = [
+                'errorNamaKategori' =>
+                '<br><div class="alert alert-danger">' . $validation->getError('namakategori') . '</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/formtambah');
+        } else {
+
+            $kategori->insert([
+                'katnama' => $namakategori
+            ]);
+
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-success"> Data Kategori Berhasil ditambah</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/index');
+        }
     }
 }
