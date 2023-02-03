@@ -62,7 +62,7 @@ class Satuan extends BaseController
 
 
             $pesan = [
-                'sukses' => '<div class="alert alert-success"> Data Kategori Berhasil ditambah</div>'
+                'sukses' => '<div class="alert alert-success"> Data satuan Berhasil ditambah</div>'
             ];
 
             session()->setFlashdata($pesan);
@@ -127,6 +127,26 @@ class Satuan extends BaseController
 
             session()->setFlashdata($pesan);
             return redirect()->to('/satuan/index');
+        }
+    }
+
+    public function delete($id){
+        $satuan = model(Modelsatuan::class);
+
+        $rowData = $satuan->find($id);
+
+        if($rowData){
+            $satuan->delete($id);
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-danger"> Data satuan Berhasil dihapus</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/satuan/index');
+
+        }else{
+            exit('data tidak ditemukan');
         }
     }
 }
