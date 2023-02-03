@@ -33,17 +33,23 @@ Manajemen Data Kategori
         <td><?= $nomor++; ?></td>
         <td><?= $row['katnama'] ?></td>
         <td>
-          <?= form_button('', 'Edit', [
-            'class' => 'btn btn-warning',
-            'onclick' => "location.href=('" . site_url('kategori/edit') . "')"
-          ]) ?>
-          <?= form_button('', 'Delete', [
-            'class' => 'btn btn-danger',
-            'onclick' => "location.href=('".site_url('kategori/delete'). "')"
-          ])?>
+          <button type="button" class="btn btn-warning" title="Edit Data" onclick="edit('<?= $row['katid'] ?>')">
+          <i class="fa fa-edit"></i>
+          </button>
+
+          <button type="button" class="btn btn-danger" title="Hapus Data" onclick="delete('<?= $row['katid'] ?>')">
+          <i class="fa fa-trash-alt"></i>
+          </button>
         </td>
       </tr>
     <?php endforeach ?>
   </tbody>
 </table>
+
+<script>
+  function edit(id){
+    window.location=('/kategori/formedit/'+id);
+  }
+  </script>
+
 <?= $this->endSection('isi') ?>
