@@ -42,8 +42,6 @@ Manajemen Data Kategori
             <i class="fa fa-trash-alt"></i>
             </button>
         </form>
-          
-         
         </td>
       </tr>
     <?php endforeach ?>

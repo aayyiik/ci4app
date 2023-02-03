@@ -5,7 +5,11 @@ Manajemen Data Satuan
 <?= $this->endSection('judul')?>
 
 <?= $this->section('subjudul')?>
-Data Satuan
+<?= form_button('', '<i class="fa fa-plus-circle"></i> Tambah Data', [
+  'class' => 'btn btn-primary',
+  'onclick' => "location.href=('" . site_url('satuan/formtambah') . "')"
+]) ?>
+
 <?= $this->endSection('subjudul')?>
 
 <?= $this->section('isi')?>
