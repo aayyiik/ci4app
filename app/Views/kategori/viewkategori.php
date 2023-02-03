@@ -33,13 +33,17 @@ Manajemen Data Kategori
         <td><?= $nomor++; ?></td>
         <td><?= $row['katnama'] ?></td>
         <td>
-          <button type="button" class="btn btn-warning" title="Edit Data" onclick="edit('<?= $row['katid'] ?>')">
+          <button type="button" class="btn btn-warning" title="Edit Data" onclick="edit('<?= $row['katid'] ?>')" >
           <i class="fa fa-edit"></i>
           </button>
-
-          <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
-          <i class="fa fa-trash-alt"></i>
-          </button>
+          <form method="POST" action="/kategori/delete/<?= $row['katid'] ?>" style="display: inline;">
+            <input type="hidden" value="DELETE" name="_method">
+            <button type="submit" class="btn btn-danger" title="Hapus Data" onsubmit="hapus()">
+            <i class="fa fa-trash-alt"></i>
+            </button>
+        </form>
+          
+         
         </td>
       </tr>
     <?php endforeach ?>
@@ -51,12 +55,12 @@ Manajemen Data Kategori
     window.location=('/kategori/formedit/'+id);
   }
 
-  function hapus(id){
-    $pesan = confirm('yakin data kategori dihapus?');
+  function hapus(){
+    $pesan = confirm('Yakin data kategori dihapus?');
 
-    if($pesan){
-      window.location=('/kategori/delete/'+id);
-    }else{
+    if($pesan==true){
+      return true;
+    }else{ 
       return false;
     }
   }
