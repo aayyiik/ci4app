@@ -70,4 +70,63 @@ class Satuan extends BaseController
         }
     }
 
+    public function formedit($id){
+        $satuan = model(Modelsatuan::class);
+
+        $rowData = $satuan->find($id);
+
+        if($rowData){
+            $data = [
+                'id' => $id,
+                'nama' => $rowData['satnama']
+            ];
+            return view('satuan/formedit', $data);
+
+        }else{
+            exit("data tidak ditemukan");
+        }
+    }
+
+    public function updatedata(){
+        
+        $satuan = model(Modelsatuan::class);
+
+        $idsatuan = $this->request->getVar('idsatuan');
+        $namasatuan = $this->request->getVar('namasatuan');
+
+        $validation = \Config\Services::validation();
+
+        $valid = $this->validate([
+            'namasatuan' => [
+                'rules' => 'required',
+                'label' => 'Nama satuan',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ],
+            ],
+        ]);
+
+        if (!$valid) {
+            $pesan = [
+                'errorNamasatuan' =>
+                '<br><div class="alert alert-danger">' . $validation->getError('namasatuan') . '</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/satuan/formedit/'.$idsatuan);
+        } else {
+
+            $satuan->update($idsatuan, [
+                'katnama' => $namasatuan
+            ]);
+
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-success"> Data satuan Berhasil ditambah</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/satuan/index');
+        }
+    }
 }
