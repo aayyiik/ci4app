@@ -12,4 +12,10 @@ class Modelbarang extends Model
         'brgkode', 'brgnama', 'brgkatid', 'btgsatid'
     ];
 
+    function getAll(){
+        $builder = $this->db->table('kategori');
+        $builder->join('kategori', 'kategori.katid = barang.brgkatid');
+        $query = $builder->get();
+        return $query->getResult();
+    }
 }
