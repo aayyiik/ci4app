@@ -28,6 +28,13 @@ class Barang extends Migration
             'brgharga' => [
                 'type' => 'double',
             ],
+            'brgstock' => [
+                'type'=> 'int',
+            ],
+            'brgspesifikasi' => [
+                'type' => 'varchar',
+                'constraint' => '500',
+            ],
             'brggambar' => [
                 'type' => 'varchar',
                 'constraint' => 200

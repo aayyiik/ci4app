@@ -20,17 +20,31 @@ Manajemen Data Barang
   <thead>
     <tr>
       <th style="width: 10px">No</th>
-      <th>Nam barang</th>
+      <th>Kode Barang</th>
+      <th>Nama barang</th>
+      <th>Spesifikasi</th>
+      <th>Kategori</th>
+      <th>Satuan</th>
+      <th>Harga</th>
+      <th>Stock</th>
+      <th>Gambar</th>
       <th>Aksi</th>
     </tr>
   </thead>
   <tbody>
     <?php $nomor = 1;
-    foreach ($tampildata as $row) :
+    foreach ($tampildata->getResultArray() as $row) :
     ?>
       <tr>
         <td><?= $nomor++; ?></td>
-        <td><?= $row['satnama'] ?></td>
+        <td><?= $row['brgkode'] ?></td>
+        <td><?= $row['brgnama'] ?></td>
+        <td><?= $row['brgspesifikasi'] ?></td>
+        <td><?= $row['brgkatid'] ?></td>
+        <td><?= $row['brgsatid'] ?></td>
+        <td><?= $row['brgharga'] ?></td>
+        <td><?= $row['brgstock'] ?></td>
+        <td><?= $row['brggambar'] ?></td>
         <td>
           <button type="button" class="btn btn-warning" title="Edit Data" onclick="edit('<?= $row['brgkode'] ?>')" >
           <i class="fa fa-edit"></i>

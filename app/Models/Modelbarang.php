@@ -9,13 +9,10 @@ class Modelbarang extends Model
     protected $table            = 'barang';
     protected $primaryKey       = 'brgkode';
     protected $allowedFields    = [
-        'brgkode', 'brgnama', 'brgkatid', 'btgsatid'
+        'brgkode', 'brgnama', 'brgstock', 'brgspesifikasi','brgkatid', 'btgsatid', 'brgharga'
     ];
 
-    function getAll(){
-        $builder = $this->db->table('kategori');
-        $builder->join('kategori', 'kategori.katid = barang.brgkatid');
-        $query = $builder->get();
-        return $query->getResult();
+    function tampildata(){
+        return $this->table('barang')->join('kategori', 'brgkatid=katid')->join('satuan', 'brgsatid = satid')->get();
     }
 }

@@ -16,7 +16,7 @@ Form Tambah Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-<?= form_open('barang/simpandata') ?>
+<?= form_open_multipart('barang/simpandata') ?>
 <div class="card-body">
     <div class="form-group">
         <label for="namabarang">Nama barang</label>
@@ -59,9 +59,27 @@ Form Tambah Barang
         ]) ?>
     </div>
 
+    <div class="form-group">
+        <label for="hargabarang">Stock</label>
+        <?= form_input('stockbarang', '', [
+            'class' => 'form-control',
+            'id' => 'stockbarang',
+            'autofocus' => true,
+            'placeholder' => 'isikan stock barang'
+        ]) ?>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputFile">Gambar</label>
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="gambarbarang">
+                <label class="custom-file-label" for="gambarbarang">Choose file</label>
+            </div>
+        </div>
+    </div>
 
 </div>
-<!-- /.card-body -->
 
 <div class="card-footer">
     <?= form_submit('', 'Simpan', [
