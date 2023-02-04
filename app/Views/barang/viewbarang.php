@@ -40,8 +40,8 @@ Manajemen Data Barang
         <td><?= $row['brgkode'] ?></td>
         <td><?= $row['brgnama'] ?></td>
         <td><?= $row['brgspesifikasi'] ?></td>
-        <td><?= $row['brgkatid'] ?></td>
-        <td><?= $row['brgsatid'] ?></td>
+        <td><?= $row['katnama'] ?></td>
+        <td><?= $row['satnama'] ?></td>
         <td><?= $row['brgharga'] ?></td>
         <td><?= $row['brgstock'] ?></td>
         <td><?= $row['brggambar'] ?></td>

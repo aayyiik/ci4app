@@ -16,7 +16,7 @@ Form Edit Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-<?= form_open_multipart('barang/update') ?>
+<?= form_open_multipart('barang/updatedata') ?>
 <div class="card-body">
 
 <?= session()->getFlashdata('error'); ?>
