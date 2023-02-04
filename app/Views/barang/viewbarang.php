@@ -15,7 +15,7 @@ Manajemen Data Barang
 
 <?= $this->section('isi')?>
 <?= session()->getFlashdata('sukses') ?>
-
+<?= session()->getFlashdata('error') ?>
 <table class="table table-bordered">
   <thead>
     <tr>

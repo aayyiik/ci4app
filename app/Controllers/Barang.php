@@ -167,4 +167,41 @@ class Barang extends BaseController
             return redirect()->to('/barang/index');
         }
     }
+
+
+    public function formedit($kode){
+
+        $barang = model(Modelbarang::class);
+
+        $cekData = $barang->find($kode);
+        if ($cekData) {
+
+            $kategori = model(Modelkategori::class);
+            $satuan = model(Modelsatuan::class);
+
+            $data = [
+                'kodebarang' => $cekData['brgkode'],
+                'namabarang' => $cekData['brgnama'],
+                'kategoribarang' => $cekData['brgkatid'],
+                'satuanbarang' => $cekData['brgsatid'],
+                'spesifikasibarang' => $cekData['brgspesifikasi'],
+                'stockbarang' => $cekData['brgstock'],
+                'hargabarang' => $cekData['brgharga'],
+                'gambarbarang' => $cekData['brggambar'],
+                'datakategori' => $kategori->findAll(),
+                'datasatuan' => $satuan->findAll()
+            ];
+            return view('barang/formedit', $data);
+            
+        } else {
+            $pesan_error = [
+                'error' =>
+                '<div class="alert alert-danger">Data barang tidak ditemukan</div>'
+            ];
+        }
+
+        session()->setFlashdata($pesan_error);
+        return redirect()->to('/barang/index');
+
+    }
 }
