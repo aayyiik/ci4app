@@ -18,6 +18,19 @@ Form Tambah Barang
 <?= $this->section('isi') ?>
 <?= form_open_multipart('barang/simpandata') ?>
 <div class="card-body">
+
+<?= session()->getFlashdata('error'); ?>
+
+    <div class="form-group">
+        <label for="namabarang">Kode barang</label>
+        <?= form_input('kodebarang', '', [
+            'class' => 'form-control',
+            'id' => 'kodebarang',
+            'autofocus' => true,
+            'placeholder' => 'isikan kode barang'
+        ]) ?>
+    </div>
+
     <div class="form-group">
         <label for="namabarang">Nama barang</label>
         <?= form_input('namabarang', '', [
@@ -27,11 +40,10 @@ Form Tambah Barang
             'placeholder' => 'isikan nama barang'
         ]) ?>
     </div>
-    <?= session()->getFlashdata('errorNamabarang'); ?>
 
     <div class="form-group">
         <label for="kategoribarang">Kategori Barang</label>
-        <select class="custom-select form-control-border">
+        <select class="custom-select form-control-border" name="kategoribarang" id="kategoribarang">
             <option>--Pilih--</option>
             <?php foreach ($tampilkat as $value) : ?>
                 <option value="<?= $value['katid']; ?>"><?= $value['katnama']; ?></option>
@@ -41,12 +53,22 @@ Form Tambah Barang
 
     <div class="form-group">
         <label for="satuanbarang">Satuan Barang</label>
-        <select class="custom-select form-control-border">
+        <select class="custom-select form-control-border" name="satuanbarang"  id="satuanbarang">
             <option>--Pilih--</option>
             <?php foreach ($tampilsat as $value) : ?>
                 <option value="<?= $value['satid']; ?>"><?= $value['satnama']; ?></option>
             <?php endforeach; ?>
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="spesifikasibarang">Spesifikasi barang</label>
+        <?= form_input('spesifikasibarang', '', [
+            'class' => 'form-control',
+            'id' => 'spesifikasibarang',
+            'autofocus' => true,
+            'placeholder' => 'isikan spesifikasi barang'
+        ]) ?>
     </div>
 
     <div class="form-group">
@@ -73,8 +95,8 @@ Form Tambah Barang
         <label for="exampleInputFile">Gambar</label>
         <div class="input-group">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="gambarbarang">
-                <label class="custom-file-label" for="gambarbarang">Choose file</label>
+                <input type="file" class="custom-file-input" id="gambarbarang" name="gambarbarang">
+                <label class="custom-file-label" for="gambarbarang"></label>
             </div>
         </div>
     </div>

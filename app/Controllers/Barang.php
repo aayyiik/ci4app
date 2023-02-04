@@ -53,15 +53,29 @@ class Barang extends BaseController
     {
 
         $barang = model(Modelbarang::class);
+        $kategori = model(Modelkategori::class);
+        $satuan = model(Modelsatuan::class);
 
+        $kodebarang = $this->request->getVar('kodebarang');
         $namabarang = $this->request->getVar('namabarang');
-        $hargabarang = $this->request->getVar('hargabarang');
+        $spesifikasibarang = $this->request->getVar('spesifikasibarang');
         $kategoribarang = $this->request->getVar('kategoribarang');
         $satuanbarang = $this->request->getVar('satuanbarang');
+        $stockbarang = $this->request->getVar('stockbarang');
+        $hargabarang = $this->request->getVar('hargabarang');
+        $gambarbarang = $this->request->getVar('gambarbarang');
 
         $validation = \Config\Services::validation();
 
         $valid = $this->validate([
+            'kodebarang' => [
+                'rules' => 'required',
+                'label' => 'Kode barang',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ],
+            ],
+
             'namabarang' => [
                 'rules' => 'required',
                 'label' => 'Nama barang',
@@ -70,9 +84,25 @@ class Barang extends BaseController
                 ],
             ],
 
+            'spesifikasibarang' => [
+                'rules' => 'required',
+                'label' => 'Spesifikasi Barang',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ],
+            ],
+
             'hargabarang' => [
-                'ruler' => 'required',
+                'rules' => 'required',
                 'label' => 'Harga Barang',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ],
+            ],
+
+            'stockbarang' => [
+                'rules' => 'required',
+                'label' => 'Stock Barang',
                 'errors' => [
                     'required' => '{field} tidak boleh kosong'
                 ],
@@ -93,32 +123,42 @@ class Barang extends BaseController
                     '{field} tidak boleh kosong'
                 ],
             ],
+
+            'gambarbarang' => [
+                'rules' => 'mime_in[gambarbarang,image/png,image/jpeg, image/jpg] |ext_in[gambarbarang,png,jpg,gif,jpeg]',
+                'label' => 'Gambar Barang',
+            ],
         ]);
 
         if (!$valid) {
             $pesan = [
-                'errorNamabarang' =>
-                '<br><div class="alert alert-danger">' . $validation->getError('namabarang') . '</div>',
-                'errorHargabarang' => 
-                '<br><div class="alert alert-danger">' . $validation->getError('hargabarang') . '</div>',
-                'errorKategoribarang' =>
-                '<br><div class="alert alert-danger">' . $validation->getError('kategoribarang') . '</div>',
-                'errorSatuanbarang' => 
-                '<br><div class="alert alert-danger">' . $validation->getError('satuanbarang') . '</div>',
+                'error' =>
+                '<div class="alert alert-danger">' . $validation->listErrors() . '</div>'
             ];
-
             session()->setFlashdata($pesan);
             return redirect()->to('/barang/formtambah');
         } else {
+            $gambarbarang = $_FILES['gambarbarang']['name'];
+            if($gambarbarang!=null){
+                $namaFileGambar = $kodebarang;
+                $fileGambar = $this->request->getFile('gambarbarang');
+                $fileGambar->move('upload', $namaFileGambar. '.'.$fileGambar->getExtension());
+            
+                $pathGambar = 'upload/'.$fileGambar->getName();
+            }else{
+                $pathGambar = '';
+            }
 
             $barang->insert([
+                'brgkode' => $kodebarang,
                 'brgnama' => $namabarang,
-                'brgharga' => $hargabarang,
                 'brgkatid' => $kategoribarang,
-                'brgsatid' => $satuanbarang
+                'brgsatid' => $satuanbarang,
+                'brgharga' => $hargabarang,
+                'brgstock' => $stockbarang,
+                'brgspesifikasi' => $spesifikasibarang,
+                'brggambar' => $pathGambar
             ]);
-
-
             $pesan = [
                 'sukses' => '<div class="alert alert-success"> Data barang Berhasil ditambah</div>'
             ];
