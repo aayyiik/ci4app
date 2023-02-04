@@ -35,6 +35,7 @@ $routes->set404Override();
 $routes->get('/', 'Main::index');
 $routes->get('/kategori/delete/(:any)', 'Kategori::index');
 $routes->get('/satuan/delete/(:any)', 'Satuan::index');
+$routes->get('/barang/delete/(:any)', 'Barang::index');
 // $routes->get('/siswa', 'Siswa::index');
 
 /*

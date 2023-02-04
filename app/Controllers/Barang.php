@@ -317,4 +317,26 @@ class Barang extends BaseController
         }
     }
 
+    public function delete($kode){
+        $barang = model(Modelbarang::class);
+
+        $cekData = $barang->find($kode);
+
+        if($cekData){
+            $pathGambarLama = $cekData['brggambar'];
+            unlink($pathGambarLama);
+            $barang->delete($kode);
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-danger"> Data barang Berhasil dihapus</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/barang/index');
+
+        }else{
+            exit('data tidak ditemukan');
+        }
+    }
+
 }

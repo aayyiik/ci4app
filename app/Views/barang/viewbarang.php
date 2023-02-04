@@ -62,8 +62,8 @@ Manajemen Data Barang
 </table>
 
 <script>
-  function edit(id){
-    window.location=('/barang/formedit/'+id);
+  function edit(kode){
+    window.location=('/barang/formedit/'+kode);
   }
 
   function hapus(){
