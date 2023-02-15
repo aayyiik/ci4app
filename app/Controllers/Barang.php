@@ -28,7 +28,8 @@ class Barang extends BaseController
     public function index()
     {
 
-        $barang = model(Modelbarang::class);
+        // $barang = model(Modelbarang::class);
+        $barang = new Modelbarang();
 
         $tombolcari = $this->request->getPost('tombolcari');
 
@@ -45,10 +46,11 @@ class Barang extends BaseController
         // }else{
         //     $barang->tampildata();
         // }
-        $databarang = $cari ? $barang->tampilcari($cari): $barang->tampildata();
+
+        $databarang = $cari ? $barang->tampilcari($cari)->paginate(10,'barang'): $barang->tampildata()->paginate(10,'barang');
 
         $data = [
-            'tampildata' => $barang->tampildata(),
+            'tampildata' => $databarang,
             'pager' => $barang->pager,
         ];
         return view('barang/viewbarang', $data);

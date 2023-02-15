@@ -42,7 +42,7 @@ Manajemen Data Barang
   </thead>
   <tbody>
     <?php $nomor = 1;
-    foreach ($tampildata->getResultArray() as $row) :
+    foreach ($tampildata as $row) :
     ?>
       <tr>
         <td><?= $nomor++; ?></td>
@@ -70,6 +70,7 @@ Manajemen Data Barang
   </tbody>
 </table>
 <div class="float-left mt-4">
+  <?= $pager->links('barang','paging_bootstrap')?>
 </div>
 
 <script>
