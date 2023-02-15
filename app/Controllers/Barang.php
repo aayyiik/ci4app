@@ -30,13 +30,27 @@ class Barang extends BaseController
 
         $barang = model(Modelbarang::class);
 
-        $data = [
-            'tampildata' => $barang->tampildata()
-        ];
+        $tombolcari = $this->request->getPost('tombolcari');
 
-        // $data = [
-        //     'tampildata' => $this->barang->tampildata()
-        // ];
+        if(isset($tombolcari)){
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_barang', $cari);
+            redirect()->to('/barang/index');
+        }else{
+            $cari = session()->get('cari_barang');
+        }
+
+        // if($databarang = $cari){
+        //     $barang->tampilcari($cari)->paginate(10, 'barang');
+        // }else{
+        //     $barang->tampildata();
+        // }
+        $databarang = $cari ? $barang->tampilcari($cari): $barang->tampildata();
+
+        $data = [
+            'tampildata' => $barang->tampildata(),
+            'pager' => $barang->pager,
+        ];
         return view('barang/viewbarang', $data);
     }
 

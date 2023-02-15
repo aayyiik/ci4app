@@ -16,6 +16,15 @@ Manajemen Data Barang
 <?= $this->section('isi')?>
 <?= session()->getFlashdata('sukses') ?>
 <?= session()->getFlashdata('error') ?>
+
+<?= form_open('barang/index')?>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="cari" autofocus>
+  <button class="btn btn-outline-secondary" type="submit" name="tombolcari">Cari</button>
+</div>
+<?= form_close(); ?>
+
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -60,6 +69,8 @@ Manajemen Data Barang
     <?php endforeach ?>
   </tbody>
 </table>
+<div class="float-left mt-4">
+</div>
 
 <script>
   function edit(kode){
