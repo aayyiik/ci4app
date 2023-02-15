@@ -20,5 +20,6 @@ class Modelbarang extends Model
         return $this->table('barang')->join('kategori', 'brgkatid = katid')->join('satuan', 'brgsatid = satid')->orlike('brgkode',$cari)->orlike('brgnama',$cari);
     }
 
+   
 
 }

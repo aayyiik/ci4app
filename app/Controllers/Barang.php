@@ -47,11 +47,18 @@ class Barang extends BaseController
         //     $barang->tampildata();
         // }
 
+        $totaldata = $cari ? $barang->tampilcari($cari)->countAllResults(): $barang->tampildata()->countAllResults();
+
         $databarang = $cari ? $barang->tampilcari($cari)->paginate(10,'barang'): $barang->tampildata()->paginate(10,'barang');
+
+        $nomorhalaman = $this->request->getVar('pager_barang') ? $this->request->getVar('page_barang') : 1;
 
         $data = [
             'tampildata' => $databarang,
             'pager' => $barang->pager,
+            'nomorhalaman' => $nomorhalaman,
+            'totaldata' => $totaldata,
+            'cari' => $cari
         ];
         return view('barang/viewbarang', $data);
     }

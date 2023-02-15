@@ -19,12 +19,17 @@ Manajemen Data Barang
 
 <?= form_open('barang/index')?>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="cari" autofocus>
+  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" name="cari" value="<?= $cari ?>" autofocus>
   <button class="btn btn-outline-secondary" type="submit" name="tombolcari">Cari</button>
 </div>
 <?= form_close(); ?>
 
-
+<span class="badge badge-success">
+  <h5>
+    <?= "Total Data = $totaldata"; ?>
+  </h5>
+</span>
+<br>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -41,7 +46,7 @@ Manajemen Data Barang
     </tr>
   </thead>
   <tbody>
-    <?php $nomor = 1;
+    <?php $nomor = 1 + (($nomorhalaman - 1) * 10);
     foreach ($tampildata as $row) :
     ?>
       <tr>
