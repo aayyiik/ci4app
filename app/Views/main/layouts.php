@@ -127,7 +127,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">TRANSAKSI</li>
+          <li class="nav-header">DATA MASTER</li>
           <li class="nav-item">
             <a href="<?= site_url('kategori/index') ?>" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
@@ -145,11 +145,17 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">DATA MASTER</li>
           <li class="nav-item">
             <a href="<?= site_url('barang/index') ?>" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>DATA BARANG</p>
+            </a>
+          </li>
+          <li class="nav-header">DATA TRANSAKSI</li>
+          <li class="nav-item">
+            <a href="<?= site_url('barangmasuk/formtambah') ?>" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>BARANG MASUK</p>
             </a>
           </li>
         </ul>
