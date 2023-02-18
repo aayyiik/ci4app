@@ -145,6 +145,7 @@ Barang Masuk
 
         let idfaktur = $('#idfaktur').val();
         let kdbarang = $('#kdbarang').val();
+        let hargabeli = $('#hargabeli').val();
         let hargajual = $('#hargajual').val();
         let jumlah = $('#jumlah').val();
         //membuat validasi data tidak kosong sebelum diklik add
@@ -152,12 +153,34 @@ Barang Masuk
             alert('Maaf Semua Data Wajib Diisi');
         }else if(kdbarang.length==0){
             alert('Maaf Semua Data Wajib Diisi');
-        }else if(hargajual==''){
+        }else if(hargabeli==''){
             alert('Maaf Semua Data Wajib Diisi');
         }else if(jumlah==''){
             alert('Maaf Semua Data Wajib Diisi');
         }else{
-
+            //ajax
+            $.ajax({
+                type: "post",
+                url: "/barangmasuk/simpanTemp",
+                data: {
+                    idfaktur : idfaktur,
+                    kdbarang : kdbarang,
+                    hargajual : hargajual,
+                    hargabeli : hargabeli,
+                    jumlah : jumlah
+                },
+                dataType: "json",
+                success: function (response) {
+                    if(response.sukses){
+                        alert(response.sukses);
+                        kosong();
+                        dataTemp();
+                    }
+                },
+                error : function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status +'\n'+ thrownError);
+                }
+            });
         }
          
     });

@@ -10,8 +10,9 @@ class TempBarangMasuk extends Migration
     {
         $this->forge->addField([
             'iddetail' => [
-                'type' => 'char',
-                'constraint' => '5',
+                'type' => 'int',
+                'unsigned'=> true,
+                'auto_increment' => true
             ],
             'detidfaktur' => [
                 'type' => 'char',
