@@ -14,7 +14,7 @@ Barang Masuk
     </div>
     <div class="form-group col-md-6">
         <label for="inputCity" class="form-label">Tgl. Barang Masuk</label>
-        <input type="date" class="form-control" id="tglfaktur" name="tglfaktur" value="<?= ('Y-m-d') ?>">
+        <input type="date" class="form-control" id="tglfaktur" name="tglfaktur" value="<?= date('Y-m-d') ?>">
     </div>
 </div>
 
@@ -41,18 +41,19 @@ Barang Masuk
 
             <div class="form-group col-md-2">
                 <label for="" class="form-label">Harga Jual</label>
-                <input type="text" class="form-control" id="hargajual" name="hargajual" readonly>
+                <input type="number" class="form-control" id="hargajual" name="hargajual" readonly>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="" class="form-label">Harga Beli</label>
-                <input type="text" class="form-control" id="hargabeli" name="hargabeli">
+                <input type="number" class="form-control" id="hargabeli" name="hargabeli">
             </div>
 
             <div class="form-group col-md-1">
                 <label for="" class="form-label">Jumlah</label>
-                <input type="text" class="form-control" id="jumlah" name="jumlah">
+                <input type="number" class="form-control" id="jumlah" name="jumlah">
             </div>
+    
 
             <div class="form-group col-md-1">
                 <label  for="" class="form-label">Aksi</label><br>
@@ -148,6 +149,7 @@ Barang Masuk
         let hargabeli = $('#hargabeli').val();
         let hargajual = $('#hargajual').val();
         let jumlah = $('#jumlah').val();
+        let id = $('#iddetail').val();
         //membuat validasi data tidak kosong sebelum diklik add
         if(idfaktur.length == 0){
             alert('Maaf Semua Data Wajib Diisi');
@@ -167,13 +169,12 @@ Barang Masuk
                     kdbarang : kdbarang,
                     hargajual : hargajual,
                     hargabeli : hargabeli,
-                    jumlah : jumlah
+                    jumlah : jumlah,
                 },
                 dataType: "json",
                 success: function (response) {
                     if(response.sukses){
                         alert(response.sukses);
-                        kosong();
                         dataTemp();
                     }
                 },

@@ -73,20 +73,19 @@ class BarangMasuk extends BaseController
         if ($this->request->isAJAX()) {
             $idfaktur = $this->request->getPost('idfaktur');
             $kdbarang = $this->request->getPost('kdbarang');
-            $hargajual = $this->request->getPost('hargajual');
             $hargabeli = $this->request->getPost('hargabeli');
+            $hargajual = $this->request->getPost('hargajual');
             $jumlah = $this->request->getPost('jumlah');
 
             $modelTempBarang = new Modeltempbarangmasuk();
 
             $modelTempBarang->insert([
-                'iddetail' => 1,
                 'detidfaktur' => $idfaktur,
                 'detbrgkode' => $kdbarang,
                 'dethargamasuk' => $hargabeli,
                 'dethargajual' => $hargajual,
                 'detjumlah' => $jumlah,
-                'detsubtotal' => intval($jumlah) * intval($hargabeli)
+                'detsubtotal' => intval($jumlah) * intval($hargabeli),
             ]);
 
             $json = [

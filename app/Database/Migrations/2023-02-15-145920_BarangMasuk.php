@@ -11,7 +11,7 @@ class BarangMasuk extends Migration
         $this->forge->addField([
             'idfaktur' => [
                 'type' => 'char',
-                'constraint' => '5',
+                'constraint' => '20',
             ],
             'tglfaktur' => [
                 'type' => 'date',

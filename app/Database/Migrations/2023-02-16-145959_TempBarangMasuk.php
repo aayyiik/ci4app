@@ -10,13 +10,12 @@ class TempBarangMasuk extends Migration
     {
         $this->forge->addField([
             'iddetail' => [
-                'type' => 'int',
-                'unsigned'=> true,
+                'type' => 'bigint',
                 'auto_increment' => true
             ],
             'detidfaktur' => [
                 'type' => 'char',
-                'constraint' => '5'
+                'constraint' => '10'
             ],
             'detbrgkode' => [
                 'type' => 'char',
@@ -37,9 +36,6 @@ class TempBarangMasuk extends Migration
             ]);
 
             $this->forge->addPrimaryKey('iddetail');
-            $this->forge->addForeignKey('detidfaktur', 'barangmasuk', 'idfaktur');
-            $this->forge->addForeignKey('detbrgkode', 'barang','brgkode');
-
             $this->forge->createTable('tempbarangmasuk');
     }
 

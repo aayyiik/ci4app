@@ -10,13 +10,12 @@ class DetailBarangMasuk extends Migration
     {
         $this->forge->addField([
             'iddetail' => [
-                'type' => 'int',
-                'unsigned' => true,
+                'type' => 'bigint',
                 'auto_increment' => true
             ],
             'detidfaktur' => [
                 'type' => 'char',
-                'constraint' => '5'
+                'constraint' => '10'
             ],
             'detbrgkode' => [
                 'type' => 'char',
