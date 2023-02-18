@@ -12,25 +12,24 @@
         </tr>
     </thead>
     <tbody>
-        <?php 
-        $nomor = 1; 
-        foreach($datatemp->getResultArray() as $row) :
+        <?php
+        $nomor = 1;
+        foreach ($datatemp->getResultArray() as $row) :
         ?>
-        <tr>
-            <td><?= $nomor++?></td>
-            <td><?= $row['brgkode']?></td>
-            <td><?= $row['brgnama']?></td>
-            <td><?= $row['dethargajual']?></td>
-            <td><?= $row['dethargamasuk']?></td>
-            <td><?= $row['detjumlah']?></td>
-            <td><?= $row['detsubtotal']?></td>
-            <td>
-                <button type="button" class="btn btn-sm btn-outline-danger" 
-                onclick="hapusItem('<?= $row['iddetail'] ?>')">
-
-                </button>
-            </td>
-        </tr>
+            <tr>
+                <td><?= $nomor++ ?></td>
+                <td><?= $row['brgkode'] ?></td>
+                <td><?= $row['brgnama'] ?></td>
+                <td><?= $row['dethargajual'] ?></td>
+                <td><?= $row['dethargamasuk'] ?></td>
+                <td><?= $row['detjumlah'] ?></td>
+                <td><?= $row['detsubtotal'] ?></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusItem('<?= $row['iddetail'] ?>')">
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
         <?php endforeach ?>
     </tbody>
 </table>

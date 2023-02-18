@@ -27,7 +27,7 @@ Barang Masuk
             <div class="form-group col-md-3">
                 <label for="kodebarang" class="form-label">Kode Barang</label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Kode Barang">
+                    <input type="text" class="form-control" placeholder="Kode Barang" id="kdbarang" name="kdbarang">
                     <button class="btn btn-outline-primary" type="button" id="btncaribarang">
                         <i class="fa fa-search"></i>
                     </button>
@@ -92,8 +92,75 @@ Barang Masuk
         });
     }
 
+    function kosong(){
+        $('#kdbarang').val();
+        $('#namabarang').val();
+        $('#hargajual').val();
+        $('#kdbarang').focus();
+    }
+
     $(document).ready(function () {
         dataTemp();
+
+        $('#kdbarang').keydown(function (e) { 
+            //13 artinya menekan enter
+            if(e.keyCode == 13){
+                e.preventDefault();
+             //   alert('ini ditekan enter');
+             let kodebarang = $('#kdbarang').val();
+
+             $.ajax({
+                type: "post",
+                url: "/barangmasuk/ambilDataBarang",
+                data: {
+                    kodebarang : kodebarang
+                },
+                dataType: "json",
+                success: function (response) {
+                    if(response.sukses){
+                        let data = response.sukses;
+                        $('#namabarang').val(data.namabarang);
+                        $('#hargajual').val(data.hargajual);
+
+                        //agar ketika setelah dienter menjadi fokus ke field berikutnya maka menggunakan focus
+                        $('#hargabeli').focus();
+                    }
+
+                    if(response.error){
+                        alert(response.error);
+                        kosong();
+                    }
+                }, 
+                error : function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status +'\n'+ thrownError);
+                }
+             });
+            }
+        });
     });
+
+    $('#tomboladd').click(function (e) { 
+        e.preventDefault();
+        // alert('ini tombol add');
+
+        let idfaktur = $('#idfaktur').val();
+        let kdbarang = $('#kdbarang').val();
+        let hargajual = $('#hargajual').val();
+        let jumlah = $('#jumlah').val();
+        //membuat validasi data tidak kosong sebelum diklik add
+        if(idfaktur.length == 0){
+            alert('Maaf Semua Data Wajib Diisi');
+        }else if(kdbarang.length==0){
+            alert('Maaf Semua Data Wajib Diisi');
+        }else if(hargajual==''){
+            alert('Maaf Semua Data Wajib Diisi');
+        }else if(jumlah==''){
+            alert('Maaf Semua Data Wajib Diisi');
+        }else{
+
+        }
+         
+    });
+
 </script>
 <?= $this->endSection('isi'); ?>
