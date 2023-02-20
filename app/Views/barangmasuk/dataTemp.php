@@ -59,6 +59,11 @@
             <td><?= $row['dethargamasuk'] ?></td>
             <td><?= $row['detjumlah'] ?></td>
             <td><?= $row['detsubtotal'] ?></td>
+            <td>
+                <button type="button" class="btn btn-sm btn-warning">
+                    <i class="fa fa-trash-alt"></i>
+                </button>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>

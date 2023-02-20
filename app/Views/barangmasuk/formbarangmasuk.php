@@ -53,10 +53,10 @@ Barang Masuk
                 <label for="" class="form-label">Jumlah</label>
                 <input type="number" class="form-control" id="jumlah" name="jumlah">
             </div>
-    
+
 
             <div class="form-group col-md-1">
-                <label  for="" class="form-label">Aksi</label><br>
+                <label for="" class="form-label">Aksi</label><br>
                 <button class="btn btn-sm btn-info" type="button" id="tomboladd">
                     <i class="fa fa-plus-square"></i>
                 </button>&nbsp;
@@ -70,77 +70,77 @@ Barang Masuk
     </div>
 </div>
 <script>
-    function dataTemp(){
+    function dataTemp() {
         let idfaktur = $('#idfaktur').val();
 
         $.ajax({
             type: "post",
             url: "/barangmasuk/dataTemp",
             data: {
-                faktur : idfaktur
+                faktur: idfaktur
             },
             dataType: "json",
-            success: function (response) {
-                if(response.data){
+            success: function(response) {
+                if (response.data) {
                     $('#tampilDataTemp').html(response.data);
                 }
             },
-            error : function(xhr, ajaxOptions, thrownError ){
-                alert(xhr.status +'\n'+ thrownError);
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
             }
         });
     }
 
-    function kosong(){
+    function kosong() {
         $('#kdbarang').val();
         $('#namabarang').val();
         $('#hargajual').val();
         $('#kdbarang').focus();
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         //ready datatemp
         dataTemp();
 
-        
-        $('#kdbarang').keydown(function (e) { 
+
+        $('#kdbarang').keydown(function(e) {
             //13 artinya menekan enter
-            if(e.keyCode == 13){
+            if (e.keyCode == 13) {
                 e.preventDefault();
-             //   alert('ini ditekan enter');
-             let kodebarang = $('#kdbarang').val();
+                //   alert('ini ditekan enter');
+                let kodebarang = $('#kdbarang').val();
 
-             $.ajax({
-                type: "post",
-                url: "/barangmasuk/ambilDataBarang",
-                data: {
-                    kodebarang : kodebarang
-                },
-                dataType: "json",
-                success: function (response) {
-                    if(response.sukses){
-                        let data = response.sukses;
-                        $('#namabarang').val(data.namabarang);
-                        $('#hargajual').val(data.hargajual);
+                $.ajax({
+                    type: "post",
+                    url: "/barangmasuk/ambilDataBarang",
+                    data: {
+                        kodebarang: kodebarang
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.sukses) {
+                            let data = response.sukses;
+                            $('#namabarang').val(data.namabarang);
+                            $('#hargajual').val(data.hargajual);
 
-                        //agar ketika setelah dienter menjadi fokus ke field berikutnya maka menggunakan focus
-                        $('#hargabeli').focus();
+                            //agar ketika setelah dienter menjadi fokus ke field berikutnya maka menggunakan focus
+                            $('#hargabeli').focus();
+                        }
+
+                        if (response.error) {
+                            alert(response.error);
+                            kosong();
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + '\n' + thrownError);
                     }
-
-                    if(response.error){
-                        alert(response.error);
-                        kosong();
-                    }
-                }, 
-                error : function(xhr, ajaxOptions, thrownError){
-                    alert(xhr.status +'\n'+ thrownError);
-                }
-             });
+                });
             }
         });
     });
 
-    $('#tomboladd').click(function (e) { 
+    $('#tomboladd').click(function(e) {
         e.preventDefault();
         // alert('ini tombol add');
 
@@ -151,40 +151,60 @@ Barang Masuk
         let jumlah = $('#jumlah').val();
         let id = $('#iddetail').val();
         //membuat validasi data tidak kosong sebelum diklik add
-        if(idfaktur.length == 0){
-            alert('Maaf Semua Data Wajib Diisi');
-        }else if(kdbarang.length==0){
-            alert('Maaf Semua Data Wajib Diisi');
-        }else if(hargabeli==''){
-            alert('Maaf Semua Data Wajib Diisi');
-        }else if(jumlah==''){
-            alert('Maaf Semua Data Wajib Diisi');
-        }else{
+        if (idfaktur.length == 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Maaf Faktur Wajib Diisi',
+            })
+        } else if (kdbarang.length == 0) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Maaf Kode Barang Wajib Diisi',
+            })
+        } else if (hargabeli == '') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Maaf Harga Beli Wajib Diisi',
+            })
+        } else if (jumlah == '') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Maaf Jumlah Wajib Diisi',
+            })
+        } else {
             //ajax
             $.ajax({
                 type: "post",
                 url: "/barangmasuk/simpanTemp",
                 data: {
-                    idfaktur : idfaktur,
-                    kdbarang : kdbarang,
-                    hargajual : hargajual,
-                    hargabeli : hargabeli,
-                    jumlah : jumlah,
+                    idfaktur: idfaktur,
+                    kdbarang: kdbarang,
+                    hargajual: hargajual,
+                    hargabeli: hargabeli,
+                    jumlah: jumlah,
                 },
                 dataType: "json",
-                success: function (response) {
-                    if(response.sukses){
+                success: function(response) {
+                    if (response.sukses) {
                         alert(response.sukses);
                         dataTemp();
                     }
                 },
-                error : function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status +'\n'+ thrownError);
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + '\n' + thrownError);
                 }
             });
         }
-         
+
     });
 
+    $('#tombolreload').click(function(e) {
+        e.preventDefault();
+        dataTemp()
+    });
 </script>
 <?= $this->endSection('isi'); ?>
