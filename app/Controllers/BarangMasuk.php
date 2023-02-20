@@ -122,3 +122,12 @@ class BarangMasuk extends BaseController
 
 
 //data view temp tidak muncul di web
+
+//solved 2
+// error 2
+// error data temp tidak bisa muncul
+
+// solusi 2
+// detbrgkode di temp char 5 sedangkan di brgkode 10
+// maka mengubah constraint detbrgkode menjadi 10
+// alasan : tidak sama antara brg kode di tabel temp dan tabel barang
