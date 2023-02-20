@@ -12,7 +12,9 @@ class Modeltempbarangmasuk extends Model
          'detidfaktur', 'detbrgkode','dethargamasuk','dethargajual','detjumlah','detsubtotal'
     ];
 
-    public function tampilDataTemp($faktur){
-        return $this->table('tempbarangmasuk')->join('barang', 'brgkode = detbrgkode')->where(['detidfaktur' => $faktur])->get();
+    public function tampilDataTemp($idfaktur){
+        return $this->table('tempbarangmasuk')->join('barang', 'brgkode = detbrgkode')->where(['detidfaktur' => $idfaktur])->get();
     }
+    
+   
 }

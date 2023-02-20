@@ -19,7 +19,7 @@ class TempBarangMasuk extends Migration
             ],
             'detbrgkode' => [
                 'type' => 'char',
-                'constraint' => '5'
+                'constraint' => '10'
             ],
             'dethargamasuk' => [
                 'type' => 'double',

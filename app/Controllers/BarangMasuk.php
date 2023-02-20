@@ -98,5 +98,10 @@ class BarangMasuk extends BaseController
     }
 }
 
+//solved
 //error di iddetail tabel temp barang masuk
 //membuat id otomatis auto_increment
+//solusi : menghapus fk di tabel temp
+
+
+//data view temp tidak muncul di web

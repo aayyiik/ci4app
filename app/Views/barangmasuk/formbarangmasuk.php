@@ -66,20 +66,18 @@ Barang Masuk
             </div>
         </div>
 
-        <div class="row" id="tampilDataTemp">
-
-        </div>
+        <div class="row" id="tampilDataTemp"></div>
     </div>
 </div>
 <script>
     function dataTemp(){
-        let faktur = $('#idfaktur').val();
+        let idfaktur = $('#idfaktur').val();
 
         $.ajax({
             type: "post",
             url: "/barangmasuk/dataTemp",
             data: {
-                faktur : faktur
+                faktur : idfaktur
             },
             dataType: "json",
             success: function (response) {
@@ -101,8 +99,10 @@ Barang Masuk
     }
 
     $(document).ready(function () {
+        //ready datatemp
         dataTemp();
 
+        
         $('#kdbarang').keydown(function (e) { 
             //13 artinya menekan enter
             if(e.keyCode == 13){
