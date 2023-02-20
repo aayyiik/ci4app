@@ -48,23 +48,55 @@
         </tr>
     </thead>
     <tbody>
-    <?php  $nomor = 1;
+        <?php $nomor = 1;
         foreach ($datatemp->getResultArray() as $row) :
         ?>
-        <tr>
-            <td><?= $nomor++ ?></td>
-            <td><?= $row['brgkode'] ?></td>
-            <td><?= $row['brgnama'] ?></td>
-            <td><?= $row['dethargajual'] ?></td>
-            <td><?= $row['dethargamasuk'] ?></td>
-            <td><?= $row['detjumlah'] ?></td>
-            <td><?= $row['detsubtotal'] ?></td>
-            <td>
-                <button type="button" class="btn btn-sm btn-warning">
-                    <i class="fa fa-trash-alt"></i>
-                </button>
-            </td>
-        </tr>
+            <tr>
+                <td><?= $nomor++ ?></td>
+                <td><?= $row['brgkode'] ?></td>
+                <td><?= $row['brgnama'] ?></td>
+                <td><?= $row['dethargajual'] ?></td>
+                <td><?= $row['dethargamasuk'] ?></td>
+                <td><?= $row['detjumlah'] ?></td>
+                <td><?= $row['detsubtotal'] ?></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusItem('<?= $row['iddetail'] ?>')">
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<script>
+    function hapusItem(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin akan menghapus?',
+            confirmButtonText: 'Ya, Hapus',
+            showCancelButton: true,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/barangmasuk/deleteItem",
+                    data: {
+                        id: id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.sukses) {
+                            dataTemp();
+                            Swal.fire('Berhasil dihapus!', '', 'success')
+                        }
+
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + '\n' + thrownError);
+                    }
+                });
+
+            }
+        })
+    }
+</script>

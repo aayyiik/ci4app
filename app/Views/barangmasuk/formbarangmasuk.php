@@ -206,5 +206,6 @@ Barang Masuk
         e.preventDefault();
         dataTemp()
     });
+    
 </script>
 <?= $this->endSection('isi'); ?>

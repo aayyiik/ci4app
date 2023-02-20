@@ -96,6 +96,23 @@ class BarangMasuk extends BaseController
             exit('Maaf data tidak dapat disimpan');
         }
     }
+
+    public function deleteItem(){
+        if($this->request->isAJAX()){
+            $id = $this->request->getPost('id');
+
+            $modelTempBarang = new Modeltempbarangmasuk();
+            
+            $modelTempBarang->delete($id);
+
+            $json = [
+                'sukses' => 'item berhasil dihapus'
+            ];
+            echo json_encode($json);
+        }else{
+            exit('Maaf data tidak dapat ditemukan');
+        }
+    }
 }
 
 //solved
