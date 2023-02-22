@@ -124,6 +124,25 @@ class BarangMasuk extends BaseController
             exit('Maaf data tidak dapat ditemukan');
         }
     }
+
+    public function detailCariBarang(){
+        if($this->request->isAJAX()){
+            $cari = $this->request->getPost('cari');
+
+            $modelCari = new Modelbarang();
+
+            $data = $modelCari->tampilcari($cari)->get();
+            $json =[
+                'data' => view('barangmasuk/detailcaribarang', [
+                    'tampildata' => $data
+                ])
+            ];
+
+            echo json_encode($json);
+        }else{
+            exit('Maaf data tidak dapat ditemukan');
+        }
+    }
 }
 
 //solved

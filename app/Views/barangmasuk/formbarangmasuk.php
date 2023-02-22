@@ -100,6 +100,38 @@ Barang Masuk
         $('#kdbarang').focus();
     }
 
+    function ambilDataBarang() {
+        //   alert('ini ditekan enter');
+        let kodebarang = $('#kdbarang').val();
+
+        $.ajax({
+            type: "post",
+            url: "/barangmasuk/ambilDataBarang",
+            data: {
+                kodebarang: kodebarang
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.sukses) {
+                    let data = response.sukses;
+                    $('#namabarang').val(data.namabarang);
+                    $('#hargajual').val(data.hargajual);
+
+                    //agar ketika setelah dienter menjadi fokus ke field berikutnya maka menggunakan focus
+                    $('#hargabeli').focus();
+                }
+
+                if (response.error) {
+                    alert(response.error);
+                    kosong();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
+            }
+        });
+    }
+
     $(document).ready(function() {
         //ready datatemp
         dataTemp();
@@ -109,35 +141,7 @@ Barang Masuk
             //13 artinya menekan enter
             if (e.keyCode == 13) {
                 e.preventDefault();
-                //   alert('ini ditekan enter');
-                let kodebarang = $('#kdbarang').val();
-
-                $.ajax({
-                    type: "post",
-                    url: "/barangmasuk/ambilDataBarang",
-                    data: {
-                        kodebarang: kodebarang
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.sukses) {
-                            let data = response.sukses;
-                            $('#namabarang').val(data.namabarang);
-                            $('#hargajual').val(data.hargajual);
-
-                            //agar ketika setelah dienter menjadi fokus ke field berikutnya maka menggunakan focus
-                            $('#hargabeli').focus();
-                        }
-
-                        if (response.error) {
-                            alert(response.error);
-                            kosong();
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status + '\n' + thrownError);
-                    }
-                });
+                ambilDataBarang();
             }
         });
     });
@@ -223,7 +227,7 @@ Barang Masuk
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status +'\n'+ thrownError);
+                alert(xhr.status + '\n' + thrownError);
             }
         });
 
