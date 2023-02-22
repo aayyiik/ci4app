@@ -69,6 +69,8 @@ Barang Masuk
         <div class="row" id="tampilDataTemp"></div>
     </div>
 </div>
+
+<div class="modalcaribarang" style="display: hidden;"></div>
 <script>
     function dataTemp() {
         let idfaktur = $('#idfaktur').val();
@@ -158,19 +160,19 @@ Barang Masuk
                 text: 'Maaf Faktur Wajib Diisi',
             })
         } else if (kdbarang.length == 0) {
-              Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'Maaf Kode Barang Wajib Diisi',
             })
         } else if (hargabeli == '') {
-              Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'Maaf Harga Beli Wajib Diisi',
             })
         } else if (jumlah == '') {
-              Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'Maaf Jumlah Wajib Diisi',
@@ -206,6 +208,25 @@ Barang Masuk
         e.preventDefault();
         dataTemp()
     });
-    
+
+
+    $('#btncaribarang').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "/barangmasuk/cariDataBarang",
+            dataType: "json",
+            success: function(response) {
+                if (response.data) {
+                    $('.modalcaribarang').html(response.data).show();
+                    $('#modalcaribarang').modal('show');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status +'\n'+ thrownError);
+            }
+        });
+
+    });
 </script>
 <?= $this->endSection('isi'); ?>

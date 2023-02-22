@@ -113,6 +113,17 @@ class BarangMasuk extends BaseController
             exit('Maaf data tidak dapat ditemukan');
         }
     }
+
+    public function cariDataBarang(){
+        if($this->request->isAJAX()){
+            $json = [
+                'data' => view('barangmasuk/modalcaribarang')
+            ];
+            echo json_encode($json);
+        }else{
+            exit('Maaf data tidak dapat ditemukan');
+        }
+    }
 }
 
 //solved
